@@ -224,6 +224,8 @@ for arg in sys.argv:
     if arg[0:17] == '--lua-system-path':
         option, val = arg.split('=')
         lua_system_path = val.strip()
+        if lua_system_path:
+            lua_system_path = os.path.abspath(lua_system_path)
 
 # If the C client is packaged elsewhere, assume the libraries are available
 lua_src_path = "modules/aerospike-lua-core/src"
@@ -249,9 +251,9 @@ for file in lua_files:
 
 # If system-path isn't specified this will install relative to sys.exec_prefix
 data_files = [
-    (lua_system_path + 'aerospike', []),
-    (lua_system_path + 'aerospike/usr-lua', []),
-    (lua_system_path + 'aerospike/lua', lua_files)
+    (os.path.join(lua_system_path, 'aerospike'), []),
+    (os.path.join(lua_system_path, 'aerospike/usr-lua'), []),
+    (os.path.join(lua_system_path, 'aerospike/lua'), lua_files)
 ]
 
 if not has_c_client:
