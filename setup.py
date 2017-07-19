@@ -218,7 +218,8 @@ else:
 # RESOLVE C CLIENT DEPENDENCY AND LUA SYSTEM PATH
 ################################################################################
 
-# Determine where the system lua files should be copied to
+# Determine where the system lua files should be installed to
+# this defaults to sys.exec_prefix
 lua_system_path = ''
 for arg in sys.argv:
     if arg[0:17] == '--lua-system-path':
